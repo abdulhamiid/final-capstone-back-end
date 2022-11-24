@@ -4,4 +4,8 @@ class FitnessActivity < ApplicationRecord
   has_many :dates, dependent: :destroy
 
   has_many_attached :images
+
+  validates :name, presence: true
+  validates :description, presence: true
+  validates :dates, presence: true
 end
