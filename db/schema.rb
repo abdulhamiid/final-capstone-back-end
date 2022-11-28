@@ -42,13 +42,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_26_103011) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
-  create_table "dates", force: :cascade do |t|
+  create_table "available_dates", force: :cascade do |t|
     t.bigint "fitness_activity_id", null: false
     t.date "date"
     t.boolean "reserved", default: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["fitness_activity_id"], name: "index_dates_on_fitness_activity_id"
+    t.index ["fitness_activity_id"], name: "index_available_dates_on_fitness_activity_id"
   end
 
   create_table "fitness_activities", force: :cascade do |t|
@@ -62,10 +62,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_26_103011) do
   create_table "reservations", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.bigint "fitness_activity_id", null: false
-    t.bigint "date_id", null: false
+    t.bigint "available_date_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["date_id"], name: "index_reservations_on_date_id"
+    t.index ["available_date_id"], name: "index_reservations_on_available_date_id"
     t.index ["fitness_activity_id"], name: "index_reservations_on_fitness_activity_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end
@@ -85,8 +85,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_26_103011) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "dates", "fitness_activities"
-  add_foreign_key "reservations", "dates"
+  add_foreign_key "available_dates", "fitness_activities"
+  add_foreign_key "reservations", "available_dates"
   add_foreign_key "reservations", "fitness_activities"
   add_foreign_key "reservations", "users"
 end
