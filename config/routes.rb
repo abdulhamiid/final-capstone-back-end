@@ -5,5 +5,10 @@ Rails.application.routes.draw do
     registrations: 'users/registrations'
   }
 
-  resources :users 
+  resources :users
+  namespace :api do
+    namespace :v1 do
+      resources :fitness_activities, only: %i[index show create destroy update]
+    end
+  end
 end
