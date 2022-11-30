@@ -1,8 +1,7 @@
 class Reservation < ApplicationRecord
-  belongs_to :user
   belongs_to :fitness_activity
-
-  has_one :available_date, dependent: :destroy
+  belongs_to :available_date, dependent: :destroy
+  belongs_to :user
 
   validates :user_id, presence: true
   validates :fitness_activity_id, presence: true
