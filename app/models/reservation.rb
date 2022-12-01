@@ -1,5 +1,5 @@
 class Reservation < ApplicationRecord
-  belongs_to :fitness_activity
+  belongs_to :fitness_activity, dependent: :destroy
   belongs_to :available_date, dependent: :destroy
   belongs_to :user
 

@@ -5,19 +5,19 @@ class Api::V1::ReservationsController < ApplicationController
   def index
     @reservations = current_user.reservations.all
 
-    render json: @reservations
+    render json: @reservations, status: 200, include: %i[fitness_activity]
   end
 
   # GET /reservations/1
   def show
     @reservation = current_user.reservations.find(params[:id])
 
-    render json: @reservation
+    render json: @reservation, status: 200, include: %i[fitness_activity]
   end
 
   # POST /reservations
   def create
-    @reservation = Reservation.new(reservation_params)
+    @reservation = current_user.reservations.new(reservation_params)
     @fitness_activity = FitnessActivity.find(params[:fitness_activity_id])
     @reservation.user_id = current_user.id
     @reservation.fitness_activity_id = @fitness_activity.id
@@ -34,7 +34,14 @@ class Api::V1::ReservationsController < ApplicationController
 
   # DELETE /reservations/1
   def destroy
+    @reservation = current_user.reservations.find(params[:id])
     @reservation.destroy
+
+    if @reservation.destroy
+      render json: { message: 'Reservation deleted' }
+    else
+      render json: { message: 'Reservation not deleted' }
+    end
   end
 
   private
