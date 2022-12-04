@@ -4,6 +4,7 @@ Rails.application.routes.draw do
       resources :users
       resources :fitness_activities, only: %i[index show create destroy update] do
         resources :reservations, only: %i[index show create destroy]
+        resources :available_dates, only: [:index]
       end
     end
   end
