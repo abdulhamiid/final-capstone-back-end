@@ -19,7 +19,6 @@ class Api::V1::ReservationsController < ApiController
   def create
     @reservation = current_user.reservations.new(reservation_params)
     @fitness_activity = FitnessActivity.find(params[:fitness_activity_id])
-    @reservation.user_id = current_user.id
     @reservation.fitness_activity_id = @fitness_activity.id
 
     if @reservation.save
