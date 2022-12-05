@@ -1,4 +1,4 @@
-class Api::V1::FitnessActivitiesController < ApplicationController
+class Api::V1::FitnessActivitiesController < ApiController
   def index
     @fitness_activities = FitnessActivity.all
     render json: @fitness_activities, status: 200, include: %i[available_dates reservations images_urls]

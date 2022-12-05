@@ -1,4 +1,4 @@
-class Api::V1::AvailableDatesController < ApplicationController
+class Api::V1::AvailableDatesController < ApiController
   before_action :set_fitness_activity, only: [:index]
 
   def index
