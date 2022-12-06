@@ -5,7 +5,7 @@ class Api::V1::ReservationsController < ApiController
   def index
     @reservations = current_user.reservations.all
 
-    render json: @reservations, status: 200, include: %i[fitness_activity]
+    render json: @reservations, status: 200, include: %i[fitness_activity available_date]
   end
 
   # GET /reservations/1
