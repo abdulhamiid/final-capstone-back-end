@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
+      post :auth, to: 'authentication#create'
       resources :users
       resources :fitness_activities, only: %i[index show create destroy update] do
         resources :reservations, only: %i[index show create destroy]
+        resources :available_dates, only: [:index]
       end
     end
   end
