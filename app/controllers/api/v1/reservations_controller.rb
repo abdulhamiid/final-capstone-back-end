@@ -1,11 +1,12 @@
-class Api::V1::ReservationsController < ApiController
+class Api::V1::ReservationsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_reservation, only: %i[show update destroy]
 
   # GET /reservations
   def index
     @reservations = current_user.reservations.all
 
-    render json: @reservations, status: 200, include: %i[fitness_activity available_date]
+    render json: @reservations, status: 200, include: %i[fitness_activity]
   end
 
   # GET /reservations/1
@@ -19,18 +20,13 @@ class Api::V1::ReservationsController < ApiController
   def create
     @reservation = current_user.reservations.new(reservation_params)
     @fitness_activity = FitnessActivity.find(params[:fitness_activity_id])
+    @reservation.user_id = current_user.id
     @reservation.fitness_activity_id = @fitness_activity.id
-    @fitness_activity.available_dates.each do |date|
-      if date.id == @reservation.available_date_id
-        date.reserved = true
-        date.save
-      end
-    end
 
     if @reservation.save
-      render json: { message: "Your #{@fitness_activity.name} reservation was successful", reservation: @reservation }, status: :created
+      render json: @reservation, status: :created
     else
-      render json: { errors: @reservation.errors.full_messages }, status: :unprocessable_entity
+      render json: @reservation.errors, status: :unprocessable_entity
     end
   end
 
@@ -40,18 +36,12 @@ class Api::V1::ReservationsController < ApiController
   # DELETE /reservations/1
   def destroy
     @reservation = current_user.reservations.find(params[:id])
-    @fitness_activity = @reservation.fitness_activity
-    @fitness_activity.available_dates.each do |date|
-      if date.id == @reservation.available_date_id
-        date.reserved = false
-        date.save
-      end
-    end
+    @reservation.destroy
 
     if @reservation.destroy
-      render json: { message: "Your reservation for #{@reservation.fitness_activity.name} was cancelled" }, status: 200
+      render json: { message: 'Reservation deleted' }
     else
-      render json: { errors: @reservation.errors.full_messages }, status: :unprocessable_entity
+      render json: { message: 'Reservation not deleted' }
     end
   end
 
