@@ -28,9 +28,9 @@ class Api::V1::ReservationsController < ApiController
     end
 
     if @reservation.save
-      render json: @reservation, status: :created
+      render json: { message: "Your reservation for #{@fitness_activity.name} was successful", reservation: @reservation }, status: :created
     else
-      render json: @reservation.errors, status: :unprocessable_entity
+      render json: { errors: @reservation.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
@@ -43,9 +43,9 @@ class Api::V1::ReservationsController < ApiController
     @reservation.destroy
 
     if @reservation.destroy
-      render json: { message: 'Reservation deleted' }
+      render json: { message: "Your reservation for #{@reservation.fitness_activity.name} was cancelled" }, status: 200
     else
-      render json: { message: 'Reservation not deleted' }
+      render json: { errors: @reservation.errors.full_messages }, status: :unprocessable_entity
     end
   end
 
