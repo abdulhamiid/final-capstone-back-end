@@ -28,7 +28,7 @@ class Api::V1::ReservationsController < ApiController
     end
 
     if @reservation.save
-      render json: { message: "Your reservation for #{@fitness_activity.name} was successful", reservation: @reservation }, status: :created
+      render json: { message: "Your #{@fitness_activity.name} reservation was successful", reservation: @reservation }, status: :created
     else
       render json: { errors: @reservation.errors.full_messages }, status: :unprocessable_entity
     end
@@ -40,7 +40,13 @@ class Api::V1::ReservationsController < ApiController
   # DELETE /reservations/1
   def destroy
     @reservation = current_user.reservations.find(params[:id])
-    @reservation.destroy
+    @fitness_activity = @reservation.fitness_activity
+    @fitness_activity.available_dates.each do |date|
+      if date.id == @reservation.available_date_id
+        date.reserved = false
+        date.save
+      end
+    end
 
     if @reservation.destroy
       render json: { message: "Your reservation for #{@reservation.fitness_activity.name} was cancelled" }, status: 200
