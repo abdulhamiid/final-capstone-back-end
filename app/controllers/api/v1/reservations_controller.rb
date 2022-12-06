@@ -20,6 +20,12 @@ class Api::V1::ReservationsController < ApiController
     @reservation = current_user.reservations.new(reservation_params)
     @fitness_activity = FitnessActivity.find(params[:fitness_activity_id])
     @reservation.fitness_activity_id = @fitness_activity.id
+    @fitness_activity.available_dates.each do |date|
+      if date.id == @reservation.available_date_id
+        date.reserved = true
+        date.save
+      end
+    end
 
     if @reservation.save
       render json: @reservation, status: :created
