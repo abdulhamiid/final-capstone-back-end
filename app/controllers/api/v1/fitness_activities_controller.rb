@@ -1,5 +1,4 @@
 class Api::V1::FitnessActivitiesController < ApiController
-  load_and_authorize_resource
   def index
     @fitness_activities = FitnessActivity.all
     render json: @fitness_activities, status: 200, include: %i[available_dates reservations images_urls]
@@ -17,7 +16,7 @@ class Api::V1::FitnessActivitiesController < ApiController
       if @fitness_activity.save
         @fitness_activity.images.attach(fitness_activity_params[:images])
         fitness_activity_params[:dates].split(',').each do |date|
-          @fitness_activity.available_dates.create(date:)
+          @fitness_activity.available_dates.create(date: date)
         end
         render json: { message: "New fitness activity, #{@fitness_activity.name}, created successfully", fitness_activity: @fitness_activity }, status: :created
       else

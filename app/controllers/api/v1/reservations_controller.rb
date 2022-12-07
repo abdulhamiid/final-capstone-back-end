@@ -1,5 +1,4 @@
 class Api::V1::ReservationsController < ApiController
-  load_and_authorize_resource
   before_action :set_reservation, only: %i[show update destroy]
 
   # GET /reservations
