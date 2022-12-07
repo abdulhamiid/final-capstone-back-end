@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Reservation, type: :model do
-  before(:all) do
+  before(:example) do
     @user = User.create!(name: 'John', email: "#{DateTime.now}@gmail.com", password: 'password')
     @fitness_activity = FitnessActivity.create(name: 'Yoga', description: 'Yoga is a group of physical, mental, and spiritual practices or disciplines which originated in ancient India.')
     @available_date = AvailableDate.create(date: '2021-01-01', fitness_activity_id: @fitness_activity.id)
