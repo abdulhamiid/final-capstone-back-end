@@ -2,7 +2,7 @@ class Api::V1::AvailableDatesController < ApiController
   before_action :set_fitness_activity, only: [:index]
 
   def index
-    @dates = @fitness_activity.available_dates.all
+    @dates = @fitness_activity.available_dates.where(reserved: false)
     render json: @dates, status: 200, include: %i[fitness_activity]
   end
 

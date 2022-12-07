@@ -23,17 +23,5 @@ RSpec.describe 'FitnessActivities', type: :request do
     it 'returns a list of fitness activities with the correct attributes' do
       expect(JSON.parse(response.body)['data'][0]['attributes']).to include('name' => 'Swimming', 'description' => 'Swimming is a the act of moving through water using the limbs.', 'amount' => 1)
     end
-
-    context 'authentication' do
-      it 'returns a 401 if no token is provided' do
-        get '/api/v1/fitness_activities'
-        expect(response).to have_http_status(:unauthorized)
-      end
-
-      it 'returns a 401 if an invalid token is provided' do
-        get '/api/v1/fitness_activities', headers: { Authorization: 'Bearer invalidtoken' }
-        expect(response).to have_http_status(:unauthorized)
-      end
-    end
   end
 end
