@@ -13,6 +13,9 @@ class Ability
         reservation.user == user
       end
       can :create, Reservation
+      can :read, User, id: user.id
+      can :read, Reservation, user_id: user.id
+      can :read, FitnessActivity
     end
   end
 end
