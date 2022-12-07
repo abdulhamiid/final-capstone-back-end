@@ -1,6 +1,4 @@
-class Api::V1::UsersController < ApplicationController
-  load_and_authorize_resource
-
+class Api::V1::UsersController < ApiController
   def index
     @users = User.all
 

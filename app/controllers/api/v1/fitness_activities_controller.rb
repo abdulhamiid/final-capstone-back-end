@@ -1,4 +1,5 @@
-class Api::V1::FitnessActivitiesController < ApplicationController
+class Api::V1::FitnessActivitiesController < ApiController
+  load_and_authorize_resource
   def index
     @fitness_activities = FitnessActivity.all
     render json: @fitness_activities, status: 200, include: %i[available_dates reservations images_urls]
@@ -18,7 +19,7 @@ class Api::V1::FitnessActivitiesController < ApplicationController
         fitness_activity_params[:dates].split(',').each do |date|
           @fitness_activity.available_dates.create(date:)
         end
-        render json: @fitness_activity
+        render json: { message: "New fitness activity, #{@fitness_activity.name}, created successfully", fitness_activity: @fitness_activity }, status: :created
       else
         render json: { errors: @fitness_activity.errors.full_messages }, status: :unprocessable_entity
       end
@@ -31,7 +32,7 @@ class Api::V1::FitnessActivitiesController < ApplicationController
   def destroy
     @fitness_activity = FitnessActivity.find(params[:id])
     @fitness_activity.destroy
-    render json: { message: 'Fitness Activity deleted' }
+    render json: { message: "Fitness activity, #{@fitness_activity.name}, deleted successfully" }, status: 200
   end
 
   def update
@@ -42,7 +43,7 @@ class Api::V1::FitnessActivitiesController < ApplicationController
       fitness_activity_params[:dates].each do |date|
         @fitness_activity.available_dates.create(date:)
       end
-      render json: @fitness_activity
+      render json: { message: "Fitness activity, #{@fitness_activity.name}, updated successfully", fitness_activity: @fitness_activity }, status: 200
     else
       render json: { errors: @fitness_activity.errors.full_messages }, status: :unprocessable_entity
     end
