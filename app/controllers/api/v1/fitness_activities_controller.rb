@@ -1,9 +1,8 @@
 class Api::V1::FitnessActivitiesController < ApplicationController
   load_and_authorize_resource
-  
   def index
     @fitness_activities = FitnessActivity.all
-    render json: @fitness_activities, status: 200, include: %i[available_dates reservations images_urls]
+    render json: @fhttps://github.com/developerwaleed/final-capstone-back-end/pull/21/conflictsitness_activities, status: 200, include: %i[available_dates reservations images_urls]
   end
 
   def show
