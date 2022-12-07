@@ -23,6 +23,5 @@ RSpec.describe 'FitnessActivities', type: :request do
     it 'returns a list of fitness activities with the correct attributes' do
       expect(JSON.parse(response.body)['data'][0]['attributes']).to include('name' => 'Swimming', 'description' => 'Swimming is a the act of moving through water using the limbs.', 'amount' => 1)
     end
-
   end
 end
