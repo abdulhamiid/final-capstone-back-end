@@ -127,31 +127,25 @@ Example command:
 - Navigate to the folder using `cd final-capstone-back-end`
 - Use the following commands to
     - install necessary gems `bundle install`
-    - run the development server `rails s -p 3001`
+    - create database `rails db:create`
+    - run migrations and create default user as admin `rails db:migrate db:seed` 
 
 ### Usage
 
 To run the project, execute the following command:
 
-<!--
-Example command:
-
 ```sh
-  rails server
+ rails s -p 3001
 ```
---->
+
 
 ### Run tests
 
 To run tests, run the following command:
 
-<!--
-Example command:
-
 ```sh
-  bin/rails test test/models/article_test.rb
+Rspec spec
 ```
---->
 
 ### Deployment
 
@@ -168,7 +162,6 @@ Example:
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-<!-- AUTHORS -->
 
 ## 👥 Authors <a name="author"></a>
 
@@ -203,7 +196,10 @@ Example:
 - Twitter: [@Prisicilla](https://twitter.com/Prisicilla)
 
 
-<!-- FUTURE FEATURES -->
+## 🔭 Future Features <a name="future-features"></a>
+
+ - Allow users to add their avatar.
+ - Create API endpoints to allow users to update their info. 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
