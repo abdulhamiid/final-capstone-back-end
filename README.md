@@ -127,19 +127,17 @@ Example command:
 - Navigate to the folder using `cd final-capstone-back-end`
 - Use the following commands to
     - install necessary gems `bundle install`
-    - run the development server `rails s -p 3001`
+    - create database `rails db:create`
+    - run migrations and create default user as admin `rails db:migrate db:seed` 
 
 ### Usage
 
 To run the project, execute the following command:
 
-<!--
-Example command:
-
 ```sh
-  rails server
+ rails s -p 3001
 ```
---->
+
 
 ### Run tests
 
