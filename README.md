@@ -1,6 +1,5 @@
 <a name="readme-top"></a>
 
-
 <div align="center">
   <img src="https://github.com/microverseinc/readme-template/blob/master/murple_logo.png" alt="logo" width="140"  height="auto" />
   <br/>
@@ -85,15 +84,6 @@ To get a local copy up and running, follow these steps.
 
 In order to run this project you need:
 
-
-<!--
-Example command:
-
-```sh
- gem install rails
-```
- -->
- 
 - Ruby runtime environment
 - Postgresql
 - Rails
@@ -102,27 +92,10 @@ Example command:
 
 Clone this repository to your desired folder:
 
-<!--
-Example commands:
-
-```sh
-  cd my-folder
-  git clone git@github.com:myaccount/my-project.git
-```
---->
-
 ### Install
 
 Install this project with:
 
-<!--
-Example command:
-
-```sh
-  cd my-project
-  gem install
-```
---->
 - Clone the repository using `git@github.com:XsidX/final-capstone-back-end.git`
 - Navigate to the folder using `cd final-capstone-back-end`
 - Use the following commands to
@@ -144,21 +117,13 @@ To run the project, execute the following command:
 To run tests, run the following command:
 
 ```sh
-Rspec spec
+rspec spec
 ```
 
 ### Deployment
 
 You can deploy this project using:
  - Heroku
-
-<!--
-Example:
-
-```sh
-
-```
- -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
