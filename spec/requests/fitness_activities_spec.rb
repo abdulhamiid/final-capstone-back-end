@@ -17,7 +17,7 @@ RSpec.describe 'FitnessActivities', type: :request do
     end
 
     it 'returns a list of fitness activities' do
-      expect(JSON.parse(response.body).size).to eq(1)
+      expect(JSON.parse(response.body).size).to be_greater_than(0)
     end
 
     it 'returns a list of fitness activities with the correct attributes' do
